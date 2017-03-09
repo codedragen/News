@@ -1,4 +1,4 @@
-package com.cl.news.modules.photo;
+package com.cl.news.modules.video;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,21 +15,21 @@ import com.cl.news.modules.base.BasePagerFragment;
  * Created by sks on 2017/3/7.
  */
 
-public class PhotoPagerFragment extends BaseFragment {
+public class VideoFragment extends BaseFragment {
     String TAG=getClass().getSimpleName();
-    public static PhotoPagerFragment getInstance(){
-        return new PhotoPagerFragment();
+    public static VideoFragment getInstance(){
+        return new VideoFragment();
+    }
+    @Override
+    public void lazyLoad() {
+
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Log.i(TAG,"onCreateView");
-        return inflater.inflate(R.layout.fragment_photo,container,false);
-    }
 
-    @Override
-    public void lazyLoad() {
 
+        return inflater.inflate(R.layout.fragment_video,container,false);
     }
 }

@@ -3,6 +3,10 @@ package com.cl.news;
 import android.app.Application;
 import android.content.Context;
 
+
+
+
+
 /**
  * Created by sks on 2017/3/7.
  */
@@ -14,6 +18,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context=this;
+
     }
 
     public static Context getContext(){

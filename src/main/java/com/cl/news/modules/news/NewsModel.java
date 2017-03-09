@@ -1,11 +1,22 @@
 package com.cl.news.modules.news;
 
+import android.app.FragmentManagerNonConfig;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+
+import com.cl.news.MyApplication;
 import com.cl.news.http.NewsApi;
 import com.cl.news.http.RetrofitService;
 import com.cl.news.http.bean.NewsInfo;
+import com.cl.news.modules.news.newslist.NewsListFragment;
+import com.cl.news.utils.NewsTypeId;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -18,42 +29,27 @@ import retrofit2.Retrofit;
 
 public class NewsModel {
 
-    private final RetrofitService api;
 
-   public  NewsModel(RetrofitService api){
-        this.api=api;
+    public void initData(NewsModel.CallBack callBack){
+        Map<String,String> newsType=  NewsTypeId.getNewsType(MyApplication.getContext());
+        Set<Map.Entry<String, String>> entries = newsType.entrySet();
+
+        List<String>titles = new ArrayList<>();
+
+        List<Fragment>fragments = new ArrayList<>();
+        Iterator<Map.Entry<String, String>> iterator = entries.iterator();
+        while (iterator.hasNext()){
+            Map.Entry<String, String> entry = iterator.next();
+            titles.add(entry.getKey());
+            fragments.add( NewsListFragment.getInstance(entry.getValue()));
+
+        }
+        callBack.onDataInit(fragments,titles);
+
+
     }
 
-
-    public void getNewsList(String newsId, int page, final Observer<NewsInfo> observer){
-        api.getNewsList(newsId, page).doOnSubscribe(new Consumer<Disposable>() {
-            @Override
-            public void accept(Disposable disposable) throws Exception {
-
-            }
-        }).subscribe(new Observer<NewsInfo>() {
-            @Override
-            public void onSubscribe(Disposable d) {
-                  observer.onSubscribe(d);
-            }
-
-            @Override
-            public void onNext(NewsInfo value) {
-                   observer.onNext(value);
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                observer.onError(e);
-            }
-
-            @Override
-            public void onComplete() {
-                    observer.onComplete();
-            }
-        });
+    interface CallBack{
+        void onDataInit(List<Fragment> fragments,List<String> titles);
     }
-
-
-
 }

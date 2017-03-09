@@ -3,6 +3,7 @@ package com.cl.news.modules.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -12,18 +13,28 @@ import android.view.View;
 public abstract class BaseFragment extends Fragment {
 
     boolean oncreatedView=false;
+    private boolean isLoaded=false;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         oncreatedView=true;
+        if (!isHidden()&&!isLoaded){
+            Log.i("onViewCreated","lazyLoad");
+            lazyLoad();
+        }
 
     }
 
+
+
     @Override
     public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden&&oncreatedView)
+        if (!hidden&&oncreatedView&&!isLoaded){
+            Log.i("onHiddenChanged","lazyLoad");
             lazyLoad();
+            isLoaded=true;
+        }
+
     }
 
  public abstract  void lazyLoad();
@@ -32,4 +43,7 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
         oncreatedView=false;
     }
+
+
+
 }

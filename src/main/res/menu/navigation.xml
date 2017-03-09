@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/news"
-        android:icon="@mipmap/ic_headset_black_24dp"
+        android:icon="@mipmap/ic_keyboard_hide_black_24dp"
         android:title="新闻" />
     <item
         android:id="@+id/video"
@@ -15,6 +15,6 @@
 
     <item
         android:id="@+id/download"
-        android:icon="@mipmap/ic_keyboard_hide_black_24dp"
-        android:title="下载"/>
+        android:icon="@mipmap/ic_headset_black_24dp"
+        android:title="音乐"/>
 </menu>
