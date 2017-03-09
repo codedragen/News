@@ -9,6 +9,8 @@ import com.cl.news.http.NewsApi;
 import com.cl.news.http.RetrofitService;
 import com.cl.news.http.bean.NewsInfo;
 import com.cl.news.modules.news.newslist.NewsListFragment;
+import com.cl.news.modules.news.newslist.NewsListModel;
+import com.cl.news.modules.news.newslist.NewsListPresenter;
 import com.cl.news.utils.NewsTypeId;
 
 import java.util.ArrayList;
@@ -41,7 +43,9 @@ public class NewsModel {
         while (iterator.hasNext()){
             Map.Entry<String, String> entry = iterator.next();
             titles.add(entry.getKey());
-            fragments.add( NewsListFragment.getInstance(entry.getValue()));
+            NewsListFragment instance = NewsListFragment.getInstance(entry.getValue());
+            new NewsListPresenter(new NewsListModel(),instance);
+            fragments.add(instance);
 
         }
         callBack.onDataInit(fragments,titles);
