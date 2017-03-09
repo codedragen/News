@@ -15,10 +15,11 @@ import com.cl.news.modules.base.BasePagerFragment;
  * Created by sks on 2017/3/9.
  */
 
-public class NewsListFragment extends BasePagerFragment{
+public class NewsListFragment extends BasePagerFragment implements NewsListView{
 
 
     private View mLayout;
+    private NewsListPresenter presenter;
 
     @Nullable
     @Override
@@ -31,6 +32,7 @@ public class NewsListFragment extends BasePagerFragment{
     @Override
     public void lazyLoad() {
 
+
     }
 
     public static NewsListFragment getInstance(String newsTypeId) {
@@ -39,5 +41,11 @@ public class NewsListFragment extends BasePagerFragment{
         bundle.putString("newsTypeId",newsTypeId);
         instance.setArguments(bundle);
         return instance;
+    }
+
+
+    @Override
+    public void setPresenter(NewsListPresenter presenter) {
+        this.presenter=presenter;
     }
 }
