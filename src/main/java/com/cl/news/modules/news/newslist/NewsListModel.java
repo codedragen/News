@@ -6,5 +6,5 @@ package com.cl.news.modules.news.newslist;
 
 public class NewsListModel {
 
-    
+
 }
