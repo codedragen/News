@@ -28,7 +28,6 @@ public class NewsTypeId {
     public  static final Map<String,String> NEWSTYPE=new HashMap<>();
 
     public static Map<String,String> getNewsType(Context context){
-        Log.i("getNewsType","getNewsType");
         InputStream inputStream =context.getResources().openRawResource(R.raw.newstypeid);
         Source source= Okio.source(inputStream);
         BufferedSource buffer = Okio.buffer(source);
@@ -38,10 +37,9 @@ public class NewsTypeId {
                 readed=buffer.readUtf8();
                 sb.append(readed);
             JSONArray jsonArray=new JSONArray(sb.toString());
-            Log.i("getNewsType",jsonArray.length()+"========Length");
+
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject o = (JSONObject) jsonArray.get(i);
-                Log.i("getNewsType",o.getString("name"));
                 NEWSTYPE.put( o.getString("name"),o.getString("typeId"));
             }
         } catch (IOException e) {

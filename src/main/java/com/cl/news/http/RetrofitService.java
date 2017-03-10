@@ -137,19 +137,17 @@ public class RetrofitService {
     }
 
 
-    public Observable<NewsInfo> getNewsList(final String newsId, int page){
+    public Observable<List<NewsInfo>> getNewsList(final String newsId, int page){
         String type;
         if (newsId.equals(HEAD_LINE_NEWS)) {
             type = "headline";
         } else {
             type = "list";
         }
-        return sNewsService.getNewsList(type,newsId,page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).flatMap(new Function<Map<String, List<NewsInfo>>, Observable<NewsInfo>>() {
-
+        return sNewsService.getNewsList(type,newsId,page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).map(new Function<Map<String, List<NewsInfo>>, List<NewsInfo>>() {
             @Override
-            public Observable<NewsInfo> apply(Map<String, List<NewsInfo>> stringListMap) throws Exception {
-
-                return Observable.fromIterable(stringListMap.get(newsId));
+            public List<NewsInfo> apply(Map<String, List<NewsInfo>> stringListMap) throws Exception {
+                return stringListMap.get(newsId);
             }
         });
 
