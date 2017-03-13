@@ -38,7 +38,7 @@ public class NewsListPresenter implements BasePresenter {
 
             @Override
             public void onNext(List<NewsInfo> value) {
-                Log.i("onNext",value==null?"true":"false");
+
                view.addData(value);
             }
 

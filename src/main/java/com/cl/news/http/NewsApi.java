@@ -14,9 +14,12 @@ import java.util.Map;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.HEAD;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+
+import static com.cl.news.http.RetrofitService.AVOID_HTTP403_FORBIDDEN;
 
 /**
  * Created by sks on 2017/3/7.
@@ -33,6 +36,7 @@ public  interface NewsApi {
      * @param startPage 起始页码
      * @return
      */
+    @Headers(AVOID_HTTP403_FORBIDDEN)
     @GET("nc/article/{type}/{id}/{startPage}-20.html")
     Observable<Map<String, List<NewsInfo>>> getNewsList(@Path("type") String type, @Path("id") String id, @Path("startPage") int startPage);
 
