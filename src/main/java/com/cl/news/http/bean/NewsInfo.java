@@ -537,6 +537,17 @@ public final class NewsInfo implements Parcelable {
             return new NewsInfo[size];
         }
     };
+
+
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.photosetID.equals(((NewsInfo)obj).getPostid());
+    }
 }
 
 
