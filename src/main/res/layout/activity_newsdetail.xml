@@ -12,11 +12,13 @@
         app:title="新闻详情"
         app:navigationIcon="@mipmap/ic_keyboard_backspace_white_24dp"
         app:titleTextColor="@android:color/white"/>
-
-    <WebView
-        android:id="@+id/activity_newsdetail_webview"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/newsdetail_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>

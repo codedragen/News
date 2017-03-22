@@ -546,7 +546,7 @@ public final class NewsInfo implements Parcelable {
 
     @Override
     public boolean equals(Object obj) {
-        return this.photosetID.equals(((NewsInfo)obj).getPostid());
+        return this.title.equals(((NewsInfo)obj).getTitle());
     }
 }
 

@@ -15,6 +15,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okio.BufferedSource;
 import okio.Okio;
 import okio.Source;
