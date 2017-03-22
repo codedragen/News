@@ -1,8 +1,10 @@
 package com.cl.news.modules.news.newslist;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.cl.news.R;
 import com.cl.news.http.bean.BannerInfo;
 import com.cl.news.http.bean.NewsInfo;
+import com.cl.news.modules.news.newsdetail.NewsDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-       NewsInfo info= data.get(position);
+       final NewsInfo info= data.get(position);
          if (holder instanceof HeadNewsHolder){
              HeadNewsHolder headNewsHolder= (HeadNewsHolder) holder;
              List<BannerInfo> bannerInfos=new ArrayList<>();
@@ -85,6 +88,16 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
              normalNewsHolder.tv_title.setText(info.getTitle());
              normalNewsHolder.tv_reply.setText(info.getReplyCount()+"");
              normalNewsHolder.tv_source.setText(info.getSource());
+             normalNewsHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     Intent intent=new Intent(context, NewsDetailActivity.class);
+                     if (!TextUtils.isEmpty(info.getPostid())) {
+                         intent.putExtra("newsId", info.getPostid());
+                         context.startActivity(intent);
+                     }
+                 }
+             });
 
          }
     }

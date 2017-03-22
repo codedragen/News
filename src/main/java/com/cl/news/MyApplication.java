@@ -2,9 +2,7 @@ package com.cl.news;
 
 import android.app.Application;
 import android.content.Context;
-
-
-
+import android.widget.VideoView;
 
 
 /**

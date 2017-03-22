@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.cl.news.MyApplication;
+import com.cl.news.http.bean.NewsDetailInfo;
 import com.cl.news.http.bean.NewsInfo;
 import com.cl.news.utils.NetUtil;
 
@@ -152,5 +153,15 @@ public class RetrofitService {
         });
 
 
+    }
+
+
+    public Observable<NewsDetailInfo> getNewsDetail(final String newsId){
+        return  sNewsService.getNewsDetail(newsId).map(new Function<Map<String, NewsDetailInfo>, NewsDetailInfo>() {
+            @Override
+            public NewsDetailInfo apply(Map<String, NewsDetailInfo> stringNewsDetailInfoMap) throws Exception {
+                return stringNewsDetailInfoMap.get(newsId);
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }
